@@ -101,6 +101,47 @@ class MyCounter extends React.Component{
     }
 }
 
+class MyCalculator extends React.Component{
+    
+    constructor(props){
+        super(props);
+        this.state = {number: props.init ? props.init : 0};
+        
+    };
+
+    clickPlus=(event,args) => {
+        this.setState(state => ({
+            number: ++state.number
+        }));
+    };
+
+    clickMinus=(event,args) => {
+        this.setState(state => ({
+            number: --state.number
+        }));
+    };
+    
+
+    render(){
+        let btnplus = <button onClick={(e)=>this.clickPlus(e)}>+</button>;
+
+        if(this.state.number >= this.props.max){
+            btnplus = null;
+        }
+        return (
+        <div>
+            <h1>{this.state.number}</h1>
+            
+            <button onClick={(e)=>this.clickMinus(e)}>-</button>
+
+            {btnplus}
+        </div>
+        );
+            
+        
+    }
+}
+
 class Button extends React.Component{
 
     constructor(props){
@@ -144,6 +185,7 @@ class Button extends React.Component{
           <Clock timeZone="Europe/London"/>
           <MyCounter />
           <Button />
+          <MyCalculator init={1} max={20}/>
         </div>,
         document.getElementById('root5')
       );
