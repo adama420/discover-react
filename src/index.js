@@ -109,17 +109,27 @@ class Button extends React.Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event){
+    handleClick=(event, monArgument) => {
         this.setState(state => ({
             isToggle: !state.isToggle
         }));
     }
 
     render(){
+        let message;
+        if (this.state.isToggle){
+             message = <h2>L'ampoule est eteinte</h2>
+        } else {
+             message = <h2>L'ampoule est allumée</h2>
+        }
         return (
-            <button onClick={this.handleClick}>
+            <div>
+                {message}
+                <button onClick={(e) => this.handleClick(e, 'toto')}>
                 {this.state.isToggle ? 'On':'Off'}
                 </button>
+            </div>
+            
         )
     }
 }
